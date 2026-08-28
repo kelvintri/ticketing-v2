@@ -13,8 +13,8 @@
     "db:apply:staging": "wrangler d1 migrations apply helpdesk-ticketing-staging --remote --env staging",
     "db:seed": "wrangler d1 execute helpdesk-ticketing-sveltekit --remote --file ./seed.sql",
     "db:seed:staging": "wrangler d1 execute helpdesk-ticketing-staging --remote --env staging --file ./seed.sql",
-    "deploy": "npm run build && wrangler deploy",
-    "deploy:staging": "npm run build && wrangler deploy --env staging",
+    "deploy": "npm run build && wrangler deploy --keep-vars",
+    "deploy:staging": "npm run build && wrangler deploy --env staging --keep-vars",
     "telegram:set-webhook": "node scripts/set-telegram-webhook.mjs",
     "telegram:set-webhook:staging": "node scripts/set-telegram-webhook.mjs --env staging",
     "telegram:set-webhook:production": "node scripts/set-telegram-webhook.mjs --env production",
@@ -33,7 +33,7 @@
     "wrangler": "^4.126.0"
   },
   "dependencies": {
-    "@tickets/shared": "file:../packages/shared",
+    "@tickets/shared": "file:./packages/shared",
     "bcryptjs": "^3.0.3",
     "jose": "^6.2.10",
     "zod": "^3.25.76"
