@@ -32,7 +32,7 @@ const defaultVarsFile = environment === "staging" ? ".dev.vars.staging" : ".dev.
 const defaultWebhookUrl = environment === "staging"
   ? "https://helpdesk-ticketing-staging.kelvintriyansyah.workers.dev/api/telegram/webhook"
   : "https://helpdesk-ticketing-sveltekit.kelvintriyansyah.workers.dev/api/telegram/webhook";
-const varsFile = process.env.TELEGRAM_VARS_FILE ?? defaultVarsFile;
+const varsFile = process.env.TELEGRAM_VARS_FILE ?? (environment === "production" ? ".dev.vars" : defaultVarsFile);
 const devVars = readDevVars(varsFile);
 const token = (process.env.TELEGRAM_BOT_TOKEN ?? devVars.TELEGRAM_BOT_TOKEN)?.trim();
 const secret = (process.env.TELEGRAM_WEBHOOK_SECRET ?? devVars.TELEGRAM_WEBHOOK_SECRET)?.trim();

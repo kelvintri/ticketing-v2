@@ -118,9 +118,9 @@ Status legend: `[ ]` pending, `[x]` complete, `[!]` blocked or requiring a desig
 - [x] Add timeout, retry, fallback, and duplicate-update tests
 - [x] Configure a staging-only Gemini secret without committing it
 - [x] Run staging Telegram webhook smoke tests with AI mode enabled
-- [x] Verify production remains `AI_MODE=off` after deployment
-- [ ] Enable production agent mode only after staging acceptance
-- [ ] Document Gemini secret rotation, disable switch, and failure playbook
+- [x] Verify production remained `AI_MODE=off` before agent rollout
+- [x] Enable production agent mode only after staging acceptance
+- [x] Document Gemini secret rotation, disable switch, and failure playbook
 
 Staging AI smoke test is ready through the isolated staging bot and webhook.
 
@@ -136,7 +136,7 @@ Staging AI smoke test is ready through the isolated staging bot and webhook.
 - [x] Deploy the SvelteKit Worker
 - [x] Verify the deployed root URL returns HTTP 200 after redirect
 - [x] Verify deployed `/api/health` returns the expected JSON
-- [!] Verify deployed authentication and one complete ticket workflow
+- [x] Verify deployed authentication and one complete ticket workflow
 - [x] Delete the old frontend-only Worker after cutover
 
 ## Pixel parity redesign
