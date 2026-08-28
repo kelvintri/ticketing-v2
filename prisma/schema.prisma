@@ -1,0 +1,179 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  runtime  = "cloudflare"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum Role {
+  AGENT
+  ADMIN
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TicketStatus {
+  OPEN
+  ASSIGNED
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum TicketSource {
+  MANUAL
+  TELEGRAM
+}
+
+enum SenderType {
+  USER
+  AGENT
+  AI
+}
+
+enum ActorType {
+  AGENT
+  USER
+  AI
+  SYSTEM
+}
+
+model Agent {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  name           String
+  passwordHash   String
+  role           Role     @default(AGENT)
+  active         Boolean  @default(true)
+  telegramChatId String?  @unique
+  createdAt      DateTime @default(now())
+
+  tickets    Ticket[]     @relation("AssignedTickets")
+  ticketReads TicketRead[]
+}
+
+model User {
+  id             String   @id @default(cuid())
+  telegramChatId String?  @unique
+  name           String
+  department     String?
+  joinCode       String?  @unique
+  createdAt      DateTime @default(now())
+
+  tickets Ticket[]
+}
+
+model Category {
+  id   String @id @default(cuid())
+  name String @unique
+
+  tickets  Ticket[]
+  articles KnowledgeArticle[]
+}
+
+model Ticket {
+  id          String         @id @default(cuid())
+  code        String         @unique
+  title       String
+  description String
+  priority    TicketPriority @default(MEDIUM)
+  status      TicketStatus   @default(OPEN)
+  source      TicketSource   @default(MANUAL)
+  createdAt   DateTime       @default(now())
+
+  firstResponseAt          DateTime?
+  resolvedAt               DateTime?
+  closedAt                 DateTime?
+  slaFirstResponseDueAt   DateTime?
+  slaResolutionDueAt      DateTime?
+  slaFirstResponseBreached Boolean @default(false)
+  slaResolutionBreached    Boolean @default(false)
+
+  rating        Int?
+  ratingComment String?
+  categoryId    String
+  category      Category @relation(fields: [categoryId], references: [id])
+  userId        String
+  user          User @relation(fields: [userId], references: [id])
+  agentId       String?
+  agent         Agent? @relation("AssignedTickets", fields: [agentId], references: [id])
+  events        TicketEvent[]
+  messages      TicketMessage[]
+  reads         TicketRead[]
+}
+
+model TicketEvent {
+  id         String    @id @default(cuid())
+  ticketId   String
+  type       String
+  fromStatus String?
+  toStatus   String?
+  actorType  ActorType
+  actorId    String?
+  note       String?
+  createdAt  DateTime @default(now())
+
+  ticket Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+}
+
+model TicketMessage {
+  id         String     @id @default(cuid())
+  ticketId   String
+  senderType SenderType
+  senderId   String?
+  body       String
+  createdAt  DateTime @default(now())
+
+  ticket Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+}
+
+model TicketRead {
+  agentId    String
+  ticketId   String
+  lastReadAt DateTime @default(now())
+
+  agent  Agent  @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  ticket Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+
+  @@id([agentId, ticketId])
+}
+
+model KnowledgeArticle {
+  id         String   @id @default(cuid())
+  title      String
+  body       String
+  keywords   String
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+  active     Boolean  @default(true)
+  updatedAt  DateTime @updatedAt
+}
+
+model SlaRule {
+  id                   String         @id @default(cuid())
+  priority             TicketPriority @unique
+  firstResponseMinutes Int
+  resolutionMinutes    Int
+}
+
+model AgentLog {
+  id          String   @id @default(cuid())
+  provider    String
+  model       String
+  chatId      String?
+  latencyMs   Int?
+  tokensIn    Int?
+  tokensOut   Int?
+  toolsCalled String?
+  outcome     String?
+  error       String?
+  createdAt   DateTime @default(now())
+}

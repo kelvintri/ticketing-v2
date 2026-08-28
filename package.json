@@ -1,0 +1,41 @@
+{
+  "name": "helpdesk-ticketing-worker",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build && node scripts/wrap-worker.mjs",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "test": "vitest run",
+    "db:apply": "wrangler d1 migrations apply helpdesk-ticketing-sveltekit --remote",
+    "db:apply:staging": "wrangler d1 migrations apply helpdesk-ticketing-staging --remote --env staging",
+    "db:seed": "wrangler d1 execute helpdesk-ticketing-sveltekit --remote --file ./seed.sql",
+    "db:seed:staging": "wrangler d1 execute helpdesk-ticketing-staging --remote --env staging --file ./seed.sql",
+    "deploy": "npm run build && wrangler deploy",
+    "deploy:staging": "npm run build && wrangler deploy --env staging",
+    "telegram:set-webhook": "node scripts/set-telegram-webhook.mjs",
+    "telegram:set-webhook:staging": "node scripts/set-telegram-webhook.mjs --env staging",
+    "telegram:set-webhook:production": "node scripts/set-telegram-webhook.mjs --env production",
+    "types": "wrangler types"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260826.1",
+    "@sveltejs/adapter-cloudflare": "^7.2.9",
+    "@sveltejs/kit": "^2.70.3",
+    "@sveltejs/vite-plugin-svelte": "^7.3.0",
+    "svelte": "^5.56.10",
+    "svelte-check": "^4.3.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.2.2",
+    "vitest": "^4.1.11",
+    "wrangler": "^4.126.0"
+  },
+  "dependencies": {
+    "@tickets/shared": "file:../packages/shared",
+    "bcryptjs": "^3.0.3",
+    "jose": "^6.2.10",
+    "zod": "^3.25.76"
+  }
+}

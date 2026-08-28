@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-28T00:00:00.000Z",
+  "title": "Design System: Ticket.Ops",
+  "extensions": {
+    "colorMeta": {
+      "primary": { "role": "primary", "displayName": "Service Blue", "canonical": "#1769e0", "tonalRamp": ["#0b2f68", "#0f468f", "#1256ad", "#1769e0", "#4b8fea", "#82b4f4", "#bad8fa", "#eaf2ff"] },
+      "navy": { "role": "neutral", "displayName": "Command Navy", "canonical": "#102a52", "tonalRamp": ["#071329", "#0c2141", "#102a52", "#1b3d73", "#4c6a9a", "#87a0c2", "#c2d0e4", "#eef3fa"] },
+      "cyan": { "role": "secondary", "displayName": "Assist Cyan", "canonical": "#087ea4", "tonalRamp": ["#053241", "#07546d", "#087ea4", "#1499bd", "#55b9d0", "#91d4e2", "#c6ebf1", "#e8f8fc"] },
+      "canvas": { "role": "neutral", "displayName": "Cool Canvas", "canonical": "#f6f8fc", "tonalRamp": ["#1b2638", "#34445b", "#53637a", "#7a899e", "#a8b4c5", "#cdd5e1", "#e7ebf2", "#f6f8fc"] },
+      "success": { "role": "tertiary", "displayName": "Service Green", "canonical": "#16794c", "tonalRamp": ["#07351f", "#0c5633", "#16794c", "#2c9b67", "#67bb91", "#9bd6b4", "#c8ead7", "#e8f7ef"] },
+      "warning": { "role": "tertiary", "displayName": "SLA Amber", "canonical": "#c77910", "tonalRamp": ["#492803", "#714206", "#975907", "#c77910", "#dd9d42", "#edbd77", "#f7dba9", "#fff5e2"] },
+      "danger": { "role": "tertiary", "displayName": "SLA Red", "canonical": "#c53b49", "tonalRamp": ["#4a1019", "#711d2a", "#99303a", "#c53b49", "#dc7180", "#eb9da8", "#f6c6cd", "#fff0f2"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Operational Display", "purpose": "Page headings and high-salience operational values." },
+      "title": { "displayName": "Workspace Title", "purpose": "Panel, card, and section headings." },
+      "body": { "displayName": "Service Body", "purpose": "Ticket detail, explanations, reports, and form content." },
+      "label": { "displayName": "Operational Label", "purpose": "Metadata, filters, and compact navigation." }
+    },
+    "shadows": [
+      { "name": "ambient-surface", "value": "0 4px 18px rgb(16 42 82 / 4%)", "purpose": "Separate regular white work surfaces from the cool canvas." },
+      { "name": "dialog-lift", "value": "0 24px 80px rgb(16 42 82 / 20%)", "purpose": "Focus an interruption dialog above the workspace." }
+    ],
+    "motion": [
+      { "name": "reveal", "value": "0.42s ease", "purpose": "Short entry motion for newly visible workspace groups." },
+      { "name": "interactive", "value": "0.16s ease", "purpose": "Hover and active navigation state changes." }
+    ],
+    "breakpoints": [
+      { "name": "wide-to-compact", "value": "1100px" },
+      { "name": "mobile", "value": "760px" },
+      { "name": "narrow", "value": "440px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "High-emphasis action for one local decision.",
+      "html": "<button class=\"ds-btn-primary\">Simpan perubahan</button>",
+      "css": ".ds-btn-primary{padding:.7rem 1rem;border:1px solid #1769e0;border-radius:9px;background:#1769e0;color:#fff;font:700 .78rem 'DM Sans',Arial,sans-serif;cursor:pointer;transition:filter .16s ease,transform .16s ease}.ds-btn-primary:hover{filter:brightness(.98);transform:translateY(-1px)}.ds-btn-primary:focus-visible{outline:3px solid rgb(23 105 224 / 14%);outline-offset:2px}.ds-btn-primary:active{transform:translateY(0)}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action for cancellation or lower-emphasis utility actions.",
+      "html": "<button class=\"ds-btn-ghost\">Batal</button>",
+      "css": ".ds-btn-ghost{padding:.7rem 1rem;border:1px solid #e2e8f2;border-radius:9px;background:#fff;color:#66758f;font:700 .78rem 'DM Sans',Arial,sans-serif;cursor:pointer;transition:background .16s ease,color .16s ease}.ds-btn-ghost:hover{background:#f6f8fc;color:#17233b}.ds-btn-ghost:focus-visible{outline:3px solid rgb(23 105 224 / 14%);outline-offset:2px}"
+    },
+    {
+      "name": "Service Field",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "Clear light-surface field for forms and filters.",
+      "html": "<label class=\"ds-field\">Email<input class=\"ds-input\" placeholder=\"nama@perusahaan.com\" /></label>",
+      "css": ".ds-field{display:grid;gap:.45rem;color:#66758f;font:700 .7rem 'DM Sans',Arial,sans-serif}.ds-input{padding:.75rem;border:1px solid #e2e8f2;border-radius:9px;background:#fff;color:#17233b;font:400 .82rem 'DM Sans',Arial,sans-serif}.ds-input:focus{outline:3px solid rgb(23 105 224 / 14%);border-color:#1769e0}"
+    },
+    {
+      "name": "Service Status Chip",
+      "kind": "chip",
+      "refersTo": "chip-status",
+      "description": "A compact, text-forward status signal with a semantic dot.",
+      "html": "<span class=\"ds-chip-status\">Dikerjakan</span>",
+      "css": ".ds-chip-status{display:inline-flex;align-items:center;gap:.35rem;padding:.28rem .55rem;border-radius:999px;background:#fff5e2;color:#ad6705;font:700 .67rem 'DM Sans',Arial,sans-serif}.ds-chip-status::before{width:.42rem;height:.42rem;border-radius:50%;background:currentColor;content:''}"
+    },
+    {
+      "name": "Work Surface",
+      "kind": "card",
+      "refersTo": "card-default",
+      "description": "Primary container for a focused operational task group.",
+      "html": "<article class=\"ds-card\"><strong>Prioritas hari ini</strong><p>Kelompokkan pekerjaan penting dengan ruang bernapas.</p></article>",
+      "css": ".ds-card{padding:1.2rem;border:1px solid #e2e8f2;border-radius:14px;background:#fff;box-shadow:0 4px 18px rgb(16 42 82 / 4%);color:#17233b;font:400 .82rem/1.55 'DM Sans',Arial,sans-serif}.ds-card strong{font:700 1.05rem 'Manrope',sans-serif}.ds-card p{margin:.5rem 0 0;color:#66758f}"
+    },
+    {
+      "name": "AI Insight",
+      "kind": "custom",
+      "description": "A cyan context card that keeps human review explicit.",
+      "html": "<aside class=\"ds-ai\"><span>✦ AI Assist</span><strong>Ringkasan konteks</strong><p>AI menyiapkan rekomendasi untuk ditinjau agen.</p><small>Perlu tinjauan agen</small></aside>",
+      "css": ".ds-ai{display:grid;gap:.5rem;padding:1.15rem;border:1px solid #b9e4ee;border-radius:14px;background:#fbfeff;color:#38546c;font:400 .78rem/1.55 'DM Sans',Arial,sans-serif}.ds-ai>span{color:#087ea4;font-weight:700}.ds-ai strong{color:#17233b;font:700 1rem 'Manrope',sans-serif}.ds-ai p{margin:0}.ds-ai small{width:max-content;padding:.28rem .55rem;border-radius:999px;background:#e8f8fc;color:#087ea4;font-weight:700}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Trustworthy Service Command Center",
+    "overview": "Ticket.Ops is a calm, professional operating console for agents who must rapidly understand ticket status, SLA risk, and AI-provided context. The system earns trust with a high-clarity workspace, disciplined semantic status colors, and generous white space rather than ornamental technical styling.\n\nThe navy navigation frame establishes a stable operations context; the light canvas keeps tables, forms, and reporting easy to scan for sustained work. Blue is the action voice, cyan identifies AI assistance, and warm colors carry only service risk. Small lifts and short state transitions add a friendly, capable energy without making the workspace feel playful or noisy.",
+    "keyCharacteristics": ["Operational clarity before decoration.", "Restrained depth with approachable motion.", "AI is visibly helpful but never visually authoritative over an agent.", "Semantic color has one stable meaning across the product."],
+    "rules": [
+      { "name": "Semantic Signal Rule", "body": "Status, SLA, priority, and AI assistance must never borrow each other's color roles. Every status signal is paired with readable text and, where relevant, a dot indicator.", "section": "colors" },
+      { "name": "Scan-First Type Rule", "body": "A heading, its immediate purpose, and its primary action should be understandable without reading every supporting label.", "section": "typography" },
+      { "name": "Workspace Priority Rule", "body": "The main task surface gets the most width; metadata, context, and secondary actions yield first when space is constrained.", "section": "layout" },
+      { "name": "Quiet Elevation Rule", "body": "Use either a restrained boundary or ambient lift to group a surface; never use heavy shadow as decoration.", "section": "elevation" }
+    ],
+    "dos": ["Do use Service Blue for the primary action and active operational state.", "Do make SLA risk, breach, completion, priority, and ticket status explicit in text as well as color.", "Do use Assist Cyan exclusively to identify AI context, knowledge help, and reviewable recommendations.", "Do keep motion short, subtle, and informative: a card or button may lift or brighten on hover, but it should never distract from an active ticket.", "Do preserve the dense-to-spacious responsive rhythm: stack groups before shrinking text or hiding task information."],
+    "donts": ["Don't use cyan as a substitute for a ticket status or SLA outcome.", "Don't make AI actions appear autonomous, irreversible, or more prominent than an agent's decision.", "Don't use amber or red decoratively; they are reserved for priority, risk, breach, error, and destructive moments.", "Don't add dark terminal textures, acid accents, or ornamental data-grid treatments to the light operational workspace.", "Don't compress tables into unreadable mobile cards when horizontal scrolling preserves the data more faithfully."]
+  }
+}

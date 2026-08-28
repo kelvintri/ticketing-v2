@@ -1,0 +1,5 @@
+CREATE TABLE "TelegramSession" (
+    "chatId" TEXT NOT NULL PRIMARY KEY,
+    "state" TEXT NOT NULL,
+    "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

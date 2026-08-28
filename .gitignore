@@ -1,0 +1,14 @@
+node_modules/
+.svelte-kit/
+.wrangler/
+.env
+.env.*
+!.env.example
+.dev.vars
+.claude/
+.codex/
+.impeccable/config.local.json
+.dev.vars.staging
+staging-secrets.json
+staging-telegram-*.json
+staging-telegram-header.txt

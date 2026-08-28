@@ -1,0 +1,59 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "helpdesk-ticketing-sveltekit",
+  "main": "./.svelte-kit/cloudflare/_worker.js",
+  "compatibility_date": "2026-08-27",
+  "compatibility_flags": ["nodejs_als"],
+  "vars": {
+    "AI_MODE": "off",
+    "GEMINI_MODEL": "gemini-2.5-flash",
+    "AI_PROVIDER": "gemini",
+    "TELEGRAM_ENV_LABEL": "PRODUCTION"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "helpdesk-ticketing-sveltekit",
+      "database_id": "25ba64a9-63a5-4d58-969a-424163d907b6",
+      "migrations_dir": "./migrations"
+    }
+  ],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".svelte-kit/cloudflare"
+  },
+  "triggers": {
+    "crons": ["*/5 * * * *"]
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "env": {
+    "staging": {
+      "name": "helpdesk-ticketing-staging",
+      "vars": {
+        "AI_MODE": "agent",
+        "GEMINI_MODEL": "gemini-2.5-flash",
+        "AI_PROVIDER": "openrouter",
+        "OPENROUTER_MODEL": "deepseek/deepseek-v4-flash-0731",
+        "TELEGRAM_ENV_LABEL": "STAGING"
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "helpdesk-ticketing-staging",
+          "database_id": "4e383196-ff08-438e-88b3-1decbf862a9e",
+          "migrations_dir": "./migrations"
+        }
+      ],
+      "triggers": {
+        "crons": ["*/5 * * * *"]
+      },
+      "observability": {
+        "enabled": true,
+        "head_sampling_rate": 1
+      }
+    }
+  }
+}

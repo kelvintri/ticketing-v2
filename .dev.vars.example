@@ -1,0 +1,8 @@
+# Copy to .dev.vars for local Wrangler development.
+JWT_SECRET=replace-with-a-local-secret
+JWT_EXPIRES_IN=8h
+TELEGRAM_BOT_TOKEN=
+TELEGRAM_WEBHOOK_SECRET=replace-with-a-webhook-secret
+GEMINI_API_KEY=
+GEMINI_MODEL=gemini-2.5-flash
+AI_MODE=off
