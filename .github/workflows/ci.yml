@@ -37,8 +37,8 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Verify generated Worker types
-        run: npm run types -- --check
-
       - name: Build Worker
         run: npm run build
+
+      - name: Verify generated Worker types
+        run: npm run types -- --check
