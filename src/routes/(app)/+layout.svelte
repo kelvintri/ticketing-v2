@@ -21,8 +21,11 @@
     }
     try {
       agent = await api<Agent>("/auth/me");
-      if (agent.role === "ADMIN") nav.push({ href: "/users", code: "05", label: "Users & Join Codes" });
-      if (agent.role !== "ADMIN" && page.url.pathname.startsWith("/users")) {
+      if (agent.role === "ADMIN") {
+        nav.push({ href: "/users", code: "05", label: "Users & Join Codes" });
+        nav.push({ href: "/settings", code: "06", label: "AI Settings" });
+      }
+      if (agent.role !== "ADMIN" && (page.url.pathname.startsWith("/users") || page.url.pathname.startsWith("/settings"))) {
         await goto("/dashboard");
         return;
       }

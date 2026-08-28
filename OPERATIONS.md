@@ -137,3 +137,8 @@ Code rollback does not undo an already-applied D1 migration. If a schema change 
 ## GitHub Actions requirements
 
 The deploy workflow requires `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in the appropriate GitHub environment. Keep production deployment approval enabled and do not copy production secrets into the staging environment.
+## AI provider controls
+
+Administrators can open **AI Settings** in the web console to change the AI mode, switch between Gemini and OpenRouter, and edit each provider's model ID. These preferences are stored in D1 and are loaded for the next Telegram request without a Worker deploy.
+
+The API keys are never stored in D1 or returned to the browser. The settings page only shows whether each Cloudflare secret is configured. Use **Test model** to send one small server-side request and view the response latency; a failed check does not expose the upstream response body.

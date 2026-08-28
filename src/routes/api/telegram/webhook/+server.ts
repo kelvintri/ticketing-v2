@@ -1,6 +1,7 @@
 import { json } from "@sveltejs/kit";
 import { processTelegramUpdate, type TelegramUpdate } from "$lib/server/telegram-service";
 import { runtimeConfig } from "$lib/server/runtime";
+import { getAiConfig } from "$lib/server/ai-config";
 import type { RequestHandler } from "./$types";
 
 function secretsMatch(expected: string, provided: string): boolean {
@@ -29,13 +30,14 @@ export const POST: RequestHandler = async ({ request, platform }) => {
 
   try {
     const update = (await request.json()) as TelegramUpdate;
-    const config = runtimeConfig(platform);
+    const envConfig = runtimeConfig(platform);
+    const config = await getAiConfig(platform, database);
     await processTelegramUpdate(database, token, update, {
-      mode: config.aiMode,
-      provider: config.aiProvider,
-      apiKey: config.aiProvider === "openrouter" ? config.openrouterApiKey : config.geminiApiKey,
-      model: config.aiProvider === "openrouter" ? config.openrouterModel : config.geminiModel,
-      environment: config.telegramEnvironment
+      mode: config.mode,
+      provider: config.provider,
+      apiKey: config.provider === "openrouter" ? envConfig.openrouterApiKey : envConfig.geminiApiKey,
+      model: config.model,
+      environment: envConfig.telegramEnvironment
     });
     return json({ ok: true });
   } catch (cause) {

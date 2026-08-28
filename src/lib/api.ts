@@ -48,6 +48,26 @@ export interface User {
   _count: { tickets: number };
 }
 
+export interface AiSettings {
+  mode: "off" | "rules" | "agent";
+  provider: "gemini" | "openrouter";
+  model: string;
+  geminiModel: string;
+  openrouterModel: string;
+  geminiKeyConfigured: boolean;
+  openrouterKeyConfigured: boolean;
+  updatedAt: string | null;
+}
+
+export interface AiHealthResult {
+  ok: boolean;
+  provider: "gemini" | "openrouter";
+  model: string;
+  latencyMs: number;
+  status: number | null;
+  message: string;
+}
+
 export class ApiError extends Error {
   constructor(public status: number, message: string) {
     super(message);

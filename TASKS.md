@@ -124,6 +124,13 @@ Status legend: `[ ]` pending, `[x]` complete, `[!]` blocked or requiring a desig
 
 Staging AI smoke test is ready through the isolated staging bot and webhook.
 
+### Admin AI controls
+
+- [x] Store provider, mode, and model selection in D1 without storing API keys
+- [x] Add admin-only web controls for Gemini/OpenRouter and model IDs
+- [x] Add server-side model health check with latency reporting
+- [x] Keep provider secrets in Cloudflare Worker secret bindings
+
 ## Deployment and verification
 
 - [x] Add D1, secrets, assets, Cron, and observability configuration
